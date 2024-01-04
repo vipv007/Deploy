@@ -27,7 +27,7 @@ jobs:
       
       - name: Push Docker image to Docker Hub
         run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u vipv --password-stdin
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u vipv --password-9092897730
           docker push vipv/kuber:${{ github.run_number }}
 
       - name: Run Docker Container
