@@ -1,0 +1,22 @@
+ <!-- image-upload.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Image Gallery
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let image of images">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="image.data"></ion-img>
+      </ion-thumbnail>
+      <ion-label>{{ image.id }}</ion-label>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="images.length === 0">
+    No images available.
+  </div>
+</ion-content>
