@@ -32,16 +32,16 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t rp1103/test:${{ github.run_number }} -f CeleSmart/Dockerfile .
+          docker build -t vipv/kuber:${{ github.run_number }} -f CeleSmart/Dockerfile .
         
       - name: Log in to Docker Hub
         run: |
-          docker login -u rp1103 -p Veeramathi@1
+          docker login -u vipv -p 9092897730
       - name: Push Docker Image
         run: |
-          docker push rp1103/test:${{ github.run_number }}
+          docker push vipv/kuber:${{ github.run_number }}
         
       - name: Run Docker Container
         run: |
-          docker run -d -p 8100:8100 rp1103/test:${{ github.run_number }} 
+          docker run -d -p 8100:8100 vipv/kuber:${{ github.run_number }} 
 
