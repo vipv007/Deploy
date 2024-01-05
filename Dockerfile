@@ -1,13 +1,17 @@
-# Stage 1: Build Ionic Angular App
-FROM node:14 AS build
-WORKDIR /usr/src/app
-COPY ./CeleSmart/package*.json ./
-RUN npm install
-COPY ./CeleSmart ./
-RUN npm run build
+# Use the official Node.js image as the base image
+FROM node:14
 
-# Stage 2: Serve Ionic Angular App using Nginx
-FROM nginx:alpine
-COPY --from=build /usr/src/app/CeleSmart/www /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Set the working directory in the container
+WORKDIR /Deploy/main/CeleSmart/src/app
+
+# Copy package.json and package-lock.json (if available)
+COPY package.json ./
+
+# Copy the remaining application code
+COPY . .
+
+# Expose port (adjust this if your application listens on a different port)
+EXPOSE 4200
+
+# Define the command to run your application
+CMD [ "npm", "start" ]
