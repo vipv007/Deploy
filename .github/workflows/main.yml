@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Celesmart
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v2
 
       - name: Set up Node.js
@@ -19,17 +19,15 @@ jobs:
           node-version: '14'
 
       - name: Install Dependencies
-        run: npm install
-
+        run: |
+          npm install --force
       - name: Build Docker image
         run: |
           docker build -t vipv/kuber:${{ github.run_number }} .
-      
       - name: Push Docker image
         run: |
           docker login -u vipv -p 9092897730
           docker push vipv/kuber:${{ github.run_number }}
-
       - name: Run Docker Container
         run: |
           docker run -d -p 4200:4200 vipv/kuber:${{ github.run_number }}
