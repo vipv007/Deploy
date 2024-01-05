@@ -2,7 +2,7 @@
 FROM node:14
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR https://github.com/vipv007/Deploy/tree/main/CeleSmart/src/app
 
 # Copy package.json and package-lock.json (if available)
 COPY package*.json ./
