@@ -1,20 +1,47 @@
-# Use the official Node.js image as the base image
-FROM node:14
+name: Build and Deploy Ionic App
 
-# Set the working directory in the container
-WORKDIR /CeleSmart
+on:
+  push:
+    branches:
+      - main
 
-# Copy package.json and package-lock.json (if available)
-COPY package*.json ./
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest 
 
-# Install Node.js dependencies
-RUN npm install --production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-# Copy the remaining application code
-COPY . .
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
 
-# Expose port (adjust this if your application listens on a different port)
-EXPOSE 4200
+      - name: Install Dependencies
+        run: |
+          cd CeleSmart
+          npm install
+      - name: Build Ionic App
+        run: |
+          cd CeleSmart
+          npm run build 
+  
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-# Define the command to run your application
-CMD [ "npm", "start" ]
+      - name: Build Docker Image
+        run: |
+          docker build -t rp1103/test:${{ github.run_number }} -f CeleSmart/Dockerfile .
+        
+      - name: Log in to Docker Hub
+        run: |
+          docker login -u rp1103 -p Veeramathi@1
+      - name: Push Docker Image
+        run: |
+          docker push rp1103/test:${{ github.run_number }}
+        
+      - name: Run Docker Container
+        run: |
+          docker run -d -p 8100:8100 rp1103/test:${{ github.run_number }} 
+Update new.yml · RP1103/mart-application@9fdd2d2
