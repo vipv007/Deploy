@@ -1,47 +1,26 @@
-name: Build and Deploy Ionic App
+# Use an official Node.js runtime as the base image for the build stage
+FROM node:16 as build
 
-on:
-  push:
-    branches:
-      - main
+# Set the working directory in the container
+WORKDIR /app
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest 
+# Copy the package.json and package-lock.json from the Angular app directory to the container
+COPY ./CeleSmart /package*.json ./
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+# Install app dependencies
+RUN npm install
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
+# Install the Ionic CLI globally
+RUN npm install -g ionic
 
-      - name: Install Dependencies
-        run: |
-          cd CeleSmart
-          npm install
-      - name: Build Ionic App
-        run: |
-          cd CeleSmart
-          npm run build 
-  
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+# Copy the rest of the application code to the working directory
+COPY ./CeleSmart .
 
-      - name: Build Docker Image
-        run: |
-          docker build -t rp1103/test:${{ github.run_number }} -f CeleSmart/Dockerfile .
-        
-      - name: Log in to Docker Hub
-        run: |
-          docker login -u rp1103 -p Veeramathi@1
-      - name: Push Docker Image
-        run: |
-          docker push rp1103/test:${{ github.run_number }}
-        
-      - name: Run Docker Container
-        run: |
-          docker run -d -p 8100:8100 rp1103/test:${{ github.run_number }} 
-Update new.yml · RP1103/mart-application@9fdd2d2
+# Build the Ionic app
+ RUN ionic build
+
+# Expose the port that the app will run on (if necessary)
+EXPOSE 8100
+
+# Use the CMD instruction to specify the command to run when starting the container
+CMD ["ionic", "serve", "--host=0.0.0.0", "--disable-host-check"]
