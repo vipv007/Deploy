@@ -13,7 +13,7 @@ RUN npm install
 # Copy the remaining application code
 COPY . .
 
-# Expose port 4200
+# Expose port (adjust this if your application listens on a different port)
 EXPOSE 4200
 
 # Define the command to run your application
