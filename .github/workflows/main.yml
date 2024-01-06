@@ -33,7 +33,7 @@ jobs:
 
    - name: Build Docker Image
      run: |
-       docker build -t vipv/kuber:${{ github.run_number }}  -f ./CeleSmart/Dockerfile .
+       docker build -t vipv/kuber:${{ github.run_number }}  -f ./Dockerfile .
        
    - name: Log in to Docker Hub
      run: |
