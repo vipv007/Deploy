@@ -23,4 +23,4 @@ COPY ./CeleSmart .
 EXPOSE 4200
 
 # Use the CMD instruction to specify the command to run when starting the container
-CMD ["ionic", "serve", "--host=0.0.0.0", "--disable-host-check"]
+CMD ["npm", "start", "--host=0.0.0.0", "--disable-host-check"]
