@@ -20,7 +20,7 @@ COPY ./CeleSmart .
  RUN ionic build
 
 # Expose the port that the app will run on (if necessary)
-EXPOSE 8100
+EXPOSE 4200
 
 # Use the CMD instruction to specify the command to run when starting the container
 CMD ["ionic", "serve", "--host=0.0.0.0", "--disable-host-check"]
