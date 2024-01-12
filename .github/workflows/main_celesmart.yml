@@ -24,6 +24,7 @@ jobs:
       - name: Install Angular CLI and dependencies
         run: |
           npm install -g @angular/cli
+          cd CeleSmart
           npm install 
 
       - name: npm install, build, and test
