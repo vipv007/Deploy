@@ -68,5 +68,5 @@ jobs:
         with:
           app-name: 'CeleSmart'
           slot-name: 'Production'
-          package: ./www
+          package: ../www
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4B7FDA319C9543EE86858BEDBAB805D2 }}
