@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CarvingService } from './carvings.service';
+import { CarvingsService } from './carvings.service';
 
-describe('CarvingService', () => {
-  let service: CarvingService;
+describe('CarvingsService', () => {
+  let service: CarvingsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CarvingService);
+    service = TestBed.inject(CarvingsService);
   });
 
   it('should be created', () => {

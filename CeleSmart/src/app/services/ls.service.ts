@@ -24,7 +24,7 @@ export class LsService {
   constructor(private httpClient: HttpClient) { }
 
   creatL(l: L): Observable<any> {
-    return this.httpClient.post<L>('http://localhost:3101/api/create-light', light, this.httpOptions)
+    return this.httpClient.post<L>('http://localhost:3101/api/create-light',  this.httpOptions)
       .pipe(
         catchError(this.handleError<L>('Error occured'))
       );
