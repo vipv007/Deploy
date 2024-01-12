@@ -21,10 +21,13 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: Install Angular CLI and dependencies
+        run: |
+          npm install -g @angular/cli
+          npm install 
+
       - name: npm install, build, and test
         run: |
-          cd CeleSmart
-          npm install
           npm run build --if-present
           npm run test --if-present
       
