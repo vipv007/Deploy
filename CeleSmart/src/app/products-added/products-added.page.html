@@ -1,6 +1,6 @@
 <!-- products-added.page.html -->
 <ion-header [translucent]="true">
-  <ion-toolbar color="success">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button (click)="navigateBack()"></ion-back-button>
     </ion-buttons>
@@ -33,7 +33,7 @@
     <ion-note slot="end">{{ totalAmount | currency: 'INR' }}</ion-note>
   </ion-item>
 
-  <ion-button expand="full" color="success" (click)="confirmOrder()">
+  <ion-button expand="full" color="primary" (click)="confirmOrder()">
     Confirm Order
   </ion-button>
 </ion-content>

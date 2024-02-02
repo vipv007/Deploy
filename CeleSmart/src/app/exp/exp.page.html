@@ -1,11 +1,12 @@
 <ion-content class="tool">
-  <ion-card>
-    <div *ngIf="orders.length > 0; else noOrders">
-      <ion-list>
-        <ion-item *ngFor="let order of orders; let orderIndex = index" class="order-item">
-          <ion-label>
-            <h3>Order {{ orderIndex + 1 }} - ID: {{ order._id }}</h3>
-
+  <div *ngIf="orders.length > 0; else noOrders">
+    <ion-list>
+      <ion-item *ngFor="let order of orders; let orderIndex = index" class="order-item">
+        <ion-card>
+          <ion-card-header>
+            <h4>Order {{ orderIndex + 1 }} - ID: {{ order._id }}</h4>
+          </ion-card-header>
+          <ion-card-content>
             <!-- Display product information -->
             <ion-list>
               <ion-item *ngFor="let product of order.products; let productIndex = index" class="product-item">
@@ -35,18 +36,18 @@
                         </li>
                         <h2>Total Expenses: {{ (carving.boardExpenses + carving.laborExpenses + carving.foodExpenses) * calculateTotalQuantity(order.products) }}</h2>
                         <hr>
-                        <h2>Profit of the order: {{ order.totalAmount - (carving.boardExpenses + carving.laborExpenses + carving.foodExpenses) * calculateTotalQuantity(order.products) }}</h2>
+                        <h2>Profit : {{ order.totalAmount - (carving.boardExpenses + carving.laborExpenses + carving.foodExpenses) * calculateTotalQuantity(order.products) }}</h2>
                       </ul>
                     </ion-label>
                   </ion-item>
                 </ng-container>
               </li>
             </ul>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
-  </ion-card>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+  </div>
 
   <ng-template #noOrders>
     <ion-card class="no-orders-card">

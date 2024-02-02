@@ -222,13 +222,22 @@ const routes: Routes = [
   {
     path: 'edit-product/:name',
     loadChildren: () => import('./edit-product/edit-product.module').then(m => m.EditProductPageModule)
-  },  {
+  },
+  {
     path: 'ordertracking',
     loadChildren: () => import('./ordertracking/ordertracking.module').then( m => m.OrdertrackingPageModule)
+  },  {
+    path: 'sal',
+    loadChildren: () => import('./sal/sal.module').then( m => m.SalPageModule)
+  },
+  {
+    path: 'tsheet',
+    loadChildren: () => import('./tsheet/tsheet.module').then( m => m.TsheetPageModule)
   },
 
 
 
+   
    
 
 

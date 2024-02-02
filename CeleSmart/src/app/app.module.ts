@@ -17,6 +17,8 @@ import { AppComponent } from './app.component';
 import { WebIntent } from '@awesome-cordova-plugins/web-intent/ngx';
 import { FormsModule } from '@angular/forms';
 
+
+
 @NgModule({
   declarations: [AppComponent,InvoiceComponent],
   entryComponents: [],

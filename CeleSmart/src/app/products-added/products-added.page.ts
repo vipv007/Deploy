@@ -77,6 +77,10 @@ export class ProductsAddedPage implements OnInit {
       totalAmount: this.totalAmount
     };
 
+        // Log size of the request data for debugging
+        const dataSize = JSON.stringify(orderDetails).length;
+        console.log(`Request Data Size: ${dataSize} bytes`);
+
     this.orderService.createOrder(orderDetails).subscribe(
       (response) => {
         console.log('Order stored successfully:', response);

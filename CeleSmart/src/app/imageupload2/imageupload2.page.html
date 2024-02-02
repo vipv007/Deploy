@@ -1,22 +1,58 @@
- <!-- image-upload.page.html -->
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Image Gallery
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+ 
+       <ion-header>
+        <ion-toolbar>
+          <ion-title>
+            Work Log
+          </ion-title>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content class="ion-padding">
+        <ion-card>
+          <ion-card-header>
+            Enter and Display Entries
+          </ion-card-header>
+      
+          <ion-button (click)="addEntry()">Add Entry</ion-button>
+          <ion-button (click)="saveEntries()">Save Entries</ion-button>
+      
+          <ion-card-content>
+            <div class="table-container">
+              <table class="bordered-table">
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let image of images">
-      <ion-thumbnail slot="start">
-        <ion-img [src]="image.data"></ion-img>
-      </ion-thumbnail>
-      <ion-label>{{ image.id }}</ion-label>
-    </ion-item>
-  </ion-list>
-  <div *ngIf="images.length === 0">
-    No images available.
-  </div>
-</ion-content>
+                <thead>
+                  <tr class="d1">
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Total Hours</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+ <!-- ... Your existing template ... -->
+<tbody id="dynamicTableBody">
+  <tr *ngFor="let entry of worklogData" (input)="adjustTableLayout()">
+    <td><ion-input [(ngModel)]="entry.date" placeholder="YYYY-MM-DD"></ion-input></td>
+    <td><ion-input [(ngModel)]="entry.name"></ion-input></td>
+    <td><ion-input [(ngModel)]="entry.checkIn"></ion-input></td>
+    <td><ion-input [(ngModel)]="entry.checkOut"></ion-input></td>
+    <td><ion-input [(ngModel)]="entry.totalHours"></ion-input></td>
+    <td><ion-textarea [(ngModel)]="entry.description" (input)="adjustTableLayout()"></ion-textarea></td>
+  </tr>
+</tbody>
+
+
+              </table>
+            </div>
+      
+            <div>
+              <p>Total Working Hours: {{ totalWorkingHours }}</p>
+              <p>Calculated Salary: {{ calculatedSalary | currency: 'INR' }}</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-content>
+      
+       
+      

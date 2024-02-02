@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
- 
-
 import { TimesheetService } from '../services/timesheet.service';
 
 @Component({
-  selector: 'app-imageupload2',
-  templateUrl: 'imageupload2.page.html',
-  styleUrls: ['imageupload2.page.scss'],
+  selector: 'app-sal',
+  templateUrl: './sal.page.html',
+  styleUrls: ['./sal.page.scss'],
 })
-export class Imageupload2Page implements OnInit {
+export class SalPage implements OnInit {
+
   worklogData: any[] = [];
-  visibleEntries: any[] = [];
   totalWorkingHours: number = 0;
   calculatedSalary: number = 0;
+  selectedName: string = '';
+  filteredWorklogData: any[] = [];
+  uniqueNames: string[] = [];
 
   constructor(private timesheetService: TimesheetService) {}
 
@@ -24,13 +25,19 @@ export class Imageupload2Page implements OnInit {
     this.timesheetService.getWorklogEntries().subscribe(
       (entries: any[]) => {
         this.worklogData = entries.slice(0, 31);
-        this.calculateTotalHours();
-        this.updateVisibleEntries();
+        this.updateUniqueNames(); // Update unique names when data is fetched
+        this.filterEntries(); // Initial filter when data is fetched
       },
       error => {
         console.error('Error fetching entries:', error);
       }
     );
+  }
+
+  updateUniqueNames(): void {
+    // Extract unique names from worklogData
+    const uniqueNamesSet = new Set<string>(this.worklogData.map(entry => entry.name));
+    this.uniqueNames = Array.from(uniqueNamesSet);
   }
 
   addEntry(): void {
@@ -43,11 +50,13 @@ export class Imageupload2Page implements OnInit {
       description: '',
     };
     this.worklogData.unshift(newEntry);
-    this.updateVisibleEntries();
+    this.filterEntries(); // Update filtered entries when a new entry is added
   }
 
   saveEntries(): void {
-    this.calculateTotalHours();
+    this.filterEntries(); // Update filtered entries before saving
+    this.calculateTotalHours(); // Recalculate total hours for filtered entries
+
     const entriesToInsert = this.worklogData.filter(entry => entry.date.trim() !== '');
     this.timesheetService.addWorklogEntries(entriesToInsert).subscribe(
       response => {
@@ -61,14 +70,31 @@ export class Imageupload2Page implements OnInit {
     );
   }
 
+  
   calculateTotalHours(): void {
     this.totalWorkingHours = 0;
-    this.worklogData.forEach(entry => {
+
+    // Calculate total hours only for the filtered entries
+    this.filteredWorklogData.forEach(entry => {
       if (entry.totalHours !== '' && !isNaN(parseFloat(entry.totalHours))) {
         this.totalWorkingHours += parseFloat(entry.totalHours);
       }
     });
+
+    // Calculate salary based on the total working hours and a fixed rate (51.28 rs per hour)
     this.calculatedSalary = this.totalWorkingHours * 51.28;
+  }
+
+  filterEntries(): void {
+    this.updateUniqueNames(); // Update unique names when entries are filtered
+
+    if (this.selectedName) {
+      this.filteredWorklogData = this.worklogData.filter(entry => entry.name === this.selectedName);
+    } else {
+      this.filteredWorklogData = this.worklogData;
+    }
+
+    this.calculateTotalHours(); // Recalculate total hours when entries are filtered
   }
 
   clearForm(): void {
@@ -80,19 +106,5 @@ export class Imageupload2Page implements OnInit {
       entry.totalHours = '';
       entry.description = '';
     });
-    this.updateVisibleEntries();
   }
-
-
-  showAllEntries = false;
-
-  toggleVisibility(): void {
-    this.showAllEntries = !this.showAllEntries;
-  }
-
-  updateVisibleEntries(): void {
-    this.visibleEntries = this.showAllEntries ? [...this.worklogData] : this.worklogData.slice(0, 3);
-  }
-   
-
 }

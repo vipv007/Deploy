@@ -8,6 +8,10 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
+        path: 'imageupload1',
+        loadChildren: () => import('../imageupload1/imageupload1.module').then(m => m.Imageupload1PageModule)
+      },
+      {
         path: 'tab1',
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
@@ -36,17 +40,27 @@ const routes: Routes = [
         path: 'admin',
         loadChildren: () => import('../admin/admin.module').then(m => m.AdminPageModule)
       },
+      {
+        path: 'tsheet',
+        loadChildren: () => import('../tsheet/tsheet.module').then(m => m.TsheetPageModule)
+      },
+    
     
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/imageupload1/tab1',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/imageupload1/tab1',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    redirectTo: '/tabs/imageupload2/tab1',
     pathMatch: 'full'
   }
 ];

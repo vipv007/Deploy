@@ -18,6 +18,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'ordercomplete',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../ordercomplete/ordercomplete.module').then(m => m.OrdercompletePageModule)
+          }
+        ]
+      },
+      {
         path: 'image-upload',
         children: [
           {

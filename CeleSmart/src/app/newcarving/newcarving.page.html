@@ -1,10 +1,10 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="success">
-    <ion-buttons slot="start">
+  <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs"></ion-back-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-title>
-      Carvings
+      Wood Carving
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -36,7 +36,7 @@
 
       <ion-row class="ion-align-items-center">
         <ion-col size="12" class="ion-text-right">
-          <ion-button color="success" (click)="addToCart(product)">
+          <ion-button color="primary" (click)="addToCart(product)">
             Add To Cart
             <ion-icon name="add"></ion-icon>
           </ion-button>
@@ -45,7 +45,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="full" color="success" (click)="goToProductsAddedPage()">
+  <ion-button expand="full" color="primary" (click)="goToProductsAddedPage()">
     Go to Products Added Page
   </ion-button>
 </ion-content>

@@ -1,0 +1,23 @@
+ 
+.bordered-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* Allow the table to adjust column widths based on content */
+}
+
+.bordered-table th, .bordered-table td {
+  border: 1px solid #dddddd;
+  padding: 8px; /* Adjust padding as needed */
+  text-align: left;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+ion-textarea {
+  width: 100%;
+ // min-height: 32px; /* Set a minimum height for the textarea */
+  resize: both; /* Allow both vertical and horizontal resizing */
+}
+

@@ -124,6 +124,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./allorders.page.scss'],
 })
 export class AllordersPage implements OnInit {
+[x: string]: any;
   orders: any[] = [];
   apiUrl = 'http://localhost:3500/api';
 

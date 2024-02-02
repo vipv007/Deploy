@@ -26,14 +26,14 @@
           <ion-icon slot="start" name="create"></ion-icon>
         </ion-button>
         <div *ngIf="editedProduct?.isEditing">
-          <form (submit)="updateProduct(editedProduct)">
-            <ion-input [(ngModel)]="editedProduct.name" name="name" placeholder="Product Name"></ion-input>
-            
-              <ion-input [(ngModel)]="editedProduct.price" name="price" type="number" placeholder="Price"></ion-input>
-            
-            <ion-input [(ngModel)]="editedProduct.qty" name="qty" type="number" placeholder="Quantity"></ion-input>
-            
-                          <ion-input [(ngModel)]="editedProduct.size" name="size" placeholder="Size"></ion-input>
+          <form (submit)="updateProduct(editedProduct)"><ion-label>Name :
+            <ion-input [(ngModel)]="editedProduct.name" name="name" placeholder="Product Name"></ion-input></ion-label>
+            <ion-label>Price  :
+              <ion-input [(ngModel)]="editedProduct.price" name="price" type="number" placeholder="Price"></ion-input></ion-label>
+            <ion-label>Quantity :
+            <ion-input [(ngModel)]="editedProduct.qty" name="qty" type="number" placeholder="Quantity"></ion-input></ion-label>
+            <ion-label>Size :
+                          <ion-input [(ngModel)]="editedProduct.size" name="size" placeholder="Size"></ion-input></ion-label>
 
             
             <!-- Image selection input -->
